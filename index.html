@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Milly's Outside Catering | Premium Events in Kenya</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Roboto:wght@300;400;500;900&display=swap");
+
+    :root {
+      --gold: #d4af37;
+      --dark: #0a0a0a;
+      --text: #f5f5f5;
+      --gray: #aaaaaa;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { 
+      background: var(--dark); 
+      color: var(--text); 
+      overflow-x: hidden;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+    }
+
+    /* Navbar (unchanged) */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 1.1rem 5%; display: flex; align-items: center; justify-content: space-between;
+      background: rgba(10, 10, 10, 0.75); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+    }
+    nav.scrolled { background: rgba(10, 10, 10, 0.95); padding: 0.85rem 5%; }
+    .logo { display: flex; align-items: center; gap: 12px; color: var(--gold); font-weight: 700; font-size: 1.3rem; text-decoration: none; }
+    .logo svg { width: 26px; height: 26px; }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a { color: var(--text); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 26px; height: 3px; background: var(--gold); transition: all 0.4s; }
+    .mobile-menu {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: var(--dark);
+      display: none; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; z-index: 1050;
+    }
+    .mobile-menu.active { display: flex; }
+    .mobile-menu a { color: var(--text); font-size: 1.5rem; text-decoration: none; }
+
+    /* Your original hero (100% unchanged) */
+    main {
+      position: relative;
+      width: calc(min(90rem, 90%));
+      margin: 0 auto;
+      min-height: 100vh;
+      padding-block: min(20vh, 3rem);
+      padding-top: 105px;
+    }
+    .left { max-width: 420px; }
+    .left span { text-transform: uppercase; letter-spacing: 2px; font-size: 0.95rem; color: var(--gray); }
+    .left h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(2.8rem, 2.8rem + 0.6vw, 4rem);
+      background: linear-gradient(45deg, var(--gold), #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.05;
+    }
+    .left hr { background: var(--gold); height: 3px; width: 70px; border: none; margin: 1.4rem 0 1.8rem; }
+    .left p { line-height: 1.65; font-size: 1rem; color: #ddd; }
+    .left a {
+      display: inline-block;
+      margin-top: 2.2rem;
+      padding: 0.85rem 2rem;
+      background: transparent;
+      border: 2px solid var(--gold);
+      color: var(--gold);
+      text-transform: uppercase;
+      font-weight: 600;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: 0.4s;
+    }
+    .left a:hover { background: var(--gold); color: var(--dark); }
+
+    .swiper { width: 100%; padding-top: 3rem; }
+    .swiper-slide {
+      width: 320px; height: 480px; border-radius: 20px;
+      display: flex; align-items: flex-end;
+      background-size: cover; background-position: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6); overflow: hidden;
+    }
+    .swiper-slide div {
+      width: 100%; padding: 2rem 1.8rem;
+      background: linear-gradient(to top, rgba(10,10,10,0.95), rgba(10,10,10,0.4));
+      opacity: 0; transition: opacity 0.6s;
+    }
+    .swiper-slide-active div { opacity: 1; }
+    .swiper-slide h2 { 
+      font-family: 'Playfair Display', serif;
+      color: var(--gold); font-size: 1.55rem; text-transform: uppercase; margin-bottom: 0.8rem; 
+    }
+    .swiper-slide p { color: #ddd; font-size: 0.92rem; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+    .swiper-slide a { display: inline-block; margin-top: 1.5rem; padding: 0.6rem 1.8rem; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; border-radius: 50px; font-size: 0.92rem; }
+    .swiper-slide a:hover { background: var(--gold); color: var(--dark); }
+    .swiper-pagination-bullet { background: #555; }
+    .swiper-pagination-bullet-active { background: var(--gold); }
+
+    .bg, .bg2 { position: fixed; z-index: -1; opacity: 0.08; pointer-events: none; }
+    .bg { top: -80px; left: -120px; width: 380px; }
+    .bg2 { bottom: -60px; right: -80px; width: 260px; }
+
+    @media (min-width: 768px) {
+      main { display: flex; align-items: center; gap: 4rem; }
+      .bg, .bg2 { opacity: 0.12; }
+    }
+
+    /* About Us Section (replaces Why Choose Us) */
+    .section { padding: 5rem 0; width: 100%; }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      text-align: center; font-size: 2.4rem;
+      margin-bottom: 1rem; background: linear-gradient(45deg, var(--gold), #fff);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .section-subtitle { text-align: center; color: var(--gray); max-width: 600px; margin: 0 auto 3.5rem; font-size: 1rem; }
+
+    .about-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .about-text p {
+      font-size: 1.02rem;
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+      color: #ddd;
+    }
+    .about-image img {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    }
+
+    /* Gallery Slideshow (unchanged) */
+    .gallery {
+      padding: 5rem 0;
+      background: rgba(20,20,20,0.6);
+    }
+    .gallery-swiper { max-width: 1000px; margin: 0 auto; }
+    .gallery-slide {
+      width: 100%; height: 480px; border-radius: 20px; overflow: hidden; cursor: pointer;
+    }
+    .gallery-slide img {
+      width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease;
+    }
+    .gallery-slide:hover img { transform: scale(1.05); }
+
+    /* Lightbox (unchanged) */
+    #lightbox {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.95); display: none;
+      align-items: center; justify-content: center; z-index: 2000;
+    }
+    #lightbox img { max-width: 90%; max-height: 90vh; border-radius: 12px; box-shadow: 0 0 40px rgba(212,175,55,0.3); }
+    #lightbox .close {
+      position: absolute; top: 30px; right: 40px;
+      font-size: 3rem; color: var(--gold); cursor: pointer; z-index: 2010;
+    }
+
+    /* Footer (unchanged) */
+    footer {
+      background: #050505;
+      padding: 4rem 5% 2rem;
+      border-top: 1px solid rgba(212,175,55,0.15);
+    }
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 3rem;
+    }
+    .footer-col h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+      font-size: 1.4rem;
+    }
+    .footer-col p, .footer-col a {
+      color: #bbb;
+      line-height: 1.7;
+      text-decoration: none;
+    }
+    .footer-col a:hover { color: var(--gold); }
+    .social-icons a {
+      color: #bbb;
+      font-size: 1.5rem;
+      margin-right: 1rem;
+    }
+    .social-icons a:hover { color: var(--gold); }
+    .footer-bottom {
+      text-align: center;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      color: #777;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      main { padding-top: 90px; }
+      .about-content { grid-template-columns: 1fr; gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar (unchanged) -->
+  <nav id="navbar">
+    <a href="#" class="logo">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+      </svg>
+      Milly's Catering
+    </a>
+    <div class="nav-links">
+      <a href="#" class="active">Home</a>
+      <a href="#">About Us</a>
+      <a href="#">Bookings</a>
+      <a href="#">Contact Us</a>
+    </div>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#" class="active">Home</a>
+    <a href="#">About Us</a>
+    <a href="#">Bookings</a>
+    <a href="#">Contact Us</a>
+  </div>
+
+  <main>
+    <!-- Your original hero (100% unchanged) -->
+    <div class="left">
+      <span>Discover</span>
+      <h1>Milly's Catering</h1>
+      <hr>
+      <p>From intimate beach weddings in Diani to grand corporate galas in Nairobi, we bring fresh, locally-sourced flavors and elegant gold-accented service to every event across Kenya.</p>
+      <a href="#">Request a Quote</a>
+    </div>
+
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" style="background-image: linear-gradient(to top, #0a0a0a, transparent), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34b4?auto=format&fit=crop&w=800&q=75')">
+          <div><h2>Beach Weddings</h2><p>Fresh seafood, tropical fruits and gold-accented platters for your dream oceanfront ceremony in Diani, Watamu or Mombasa.</p><a href="#">View Menu</a></div>
+        </div>
+        <div class="swiper-slide" style="background-image: linear-gradient(to top, #0a0a0a, transparent), url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=75')">
+          <div><h2>Corporate Events</h2><p>Seamless executive lunches, boardroom dinners and product launches with professional service and refined black & gold styling.</p><a href="#">View Menu</a></div>
+        </div>
+        <div class="swiper-slide" style="background-image: linear-gradient(to top, #0a0a0a, transparent), url('https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=800&q=75')">
+          <div><h2>Garden Parties</h2><p>Intimate family celebrations, anniversaries and birthdays in private gardens with elegant outdoor dining and live stations.</p><a href="#">View Menu</a></div>
+        </div>
+        <div class="swiper-slide" style="background-image: linear-gradient(to top, #0a0a0a, transparent), url('https://images.unsplash.com/photo-1600585154340-be6161a56a26?auto=format&fit=crop&w=800&q=75')">
+          <div><h2>Festival Feasts</h2><p>Large-scale catering for festivals, team-building days and outdoor corporate events with multiple live cooking stations.</p><a href="#">View Menu</a></div>
+        </div>
+        <div class="swiper-slide" style="background-image: linear-gradient(to top, #0a0a0a, transparent), url('https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=800&q=75')">
+          <div><h2>Luxury Dinners</h2><p>Multi-course fine-dining experiences with sophisticated black & gold table settings for exclusive parties and high-end venues.</p><a href="#">View Menu</a></div>
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+
+    <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=600&q=30" alt="" class="bg">
+    <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=500&q=30" alt="" class="bg2">
+  </main>
+
+  <!-- About Us Section (replaces Why Choose Us) -->
+  <section class="section">
+    <h2 class="section-title">About Us</h2>
+    <p class="section-subtitle">Crafting unforgettable culinary experiences since 2018</p>
+    
+    <div class="about-content">
+      <div class="about-text">
+        <p>Milly's Outside Catering was founded by Milly Akinyi in Mombasa with a simple dream: to bring restaurant-quality food and warm, professional service to outdoor events across Kenya.</p>
+        <p>From intimate beach weddings in Diani to large corporate galas in Nairobi, we have proudly catered over 850 events. Our passion lies in using the freshest local ingredients, creating custom menus, and delivering flawless execution every single time.</p>
+        <p>Whether it's a romantic proposal on the beach or a high-profile product launch, we treat every occasion as our own celebration — because your moment deserves nothing less than perfection.</p>
+      </div>
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d1a7a?auto=format&fit=crop&w=800&q=80" alt="Milly's Catering Team">
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Slideshow (unchanged) -->
+  <section class="section gallery">
+    <h2 class="section-title">Our Gallery</h2>
+    <p class="section-subtitle">Moments we’ve created across Kenya</p>
+    <div class="gallery-swiper swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide gallery-slide" data-src="https://images.unsplash.com/photo-1517248135467-4c7edcad34b4?auto=format&fit=crop&w=1600&q=90">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34b4?auto=format&fit=crop&w=800&q=80" alt="">
+        </div>
+        <div class="swiper-slide gallery-slide" data-src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1600&q=90">
+          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80" alt="">
+        </div>
+        <div class="swiper-slide gallery-slide" data-src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=1600&q=90">
+          <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=800&q=80" alt="">
+        </div>
+        <div class="swiper-slide gallery-slide" data-src="https://images.unsplash.com/photo-1600585154340-be6161a56a26?auto=format&fit=crop&w=1600&q=90">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a26?auto=format&fit=crop&w=800&q=80" alt="">
+        </div>
+        <div class="swiper-slide gallery-slide" data-src="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=1600&q=90">
+          <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=800&q=80" alt="">
+        </div>
+        <div class="swiper-slide gallery-slide" data-src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?auto=format&fit=crop&w=1600&q=90">
+          <img src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?auto=format&fit=crop&w=800&q=80" alt="">
+        </div>
+      </div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+  </section>
+
+  <!-- Footer (unchanged) -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-col">
+        <h3>Milly's Catering</h3>
+        <p>Premium outside catering across Kenya since 2018.<br>Turning every occasion into an unforgettable experience.</p>
+      </div>
+      <div class="footer-col">
+        <h3>Quick Links</h3>
+        <p><a href="#">Home</a><br><a href="#">About Us</a><br><a href="#">Menus</a><br><a href="#">Gallery</a><br><a href="#">Bookings</a></p>
+      </div>
+      <div class="footer-col">
+        <h3>Contact Us</h3>
+        <p>📍 Mombasa • Nairobi • Diani<br>📞 +254 712 345 678<br>✉️ info@millyscatering.co.ke<br>🕒 Mon–Sun: 7am – 10pm</p>
+      </div>
+      <div class="footer-col">
+        <h3>Follow Us</h3>
+        <div class="social-icons">
+          <a href="#">📘</a><a href="#">📷</a><a href="#">🐦</a><a href="#">▶️</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Milly's Outside Catering. All Rights Reserved. | Designed with ❤️ in Kenya
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div id="lightbox">
+    <span class="close">×</span>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    // Hero Swiper
+    new Swiper(".swiper", {
+      effect: "coverflow",
+      grabCursor: true,
+      centeredSlides: true,
+      coverflowEffect: { rotate: 0, stretch: 0, depth: 120, modifier: 2.5, slideShadows: true },
+      keyboard: { enabled: true },
+      mousewheel: { thresholdDelta: 70 },
+      loop: true,
+      pagination: { el: ".swiper-pagination", clickable: true },
+      breakpoints: { 640: { slidesPerView: 2 }, 768: { slidesPerView: 1 }, 1024: { slidesPerView: 2 }, 1560: { slidesPerView: 3 } }
+    });
+
+    // Gallery Swiper
+    new Swiper(".gallery-swiper", {
+      loop: true,
+      navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+      slidesPerView: 1,
+      spaceBetween: 30,
+      breakpoints: { 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
+    });
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.querySelector('.close');
+
+    document.querySelectorAll('.gallery-slide').forEach(slide => {
+      slide.addEventListener('click', () => {
+        lightboxImg.src = slide.getAttribute('data-src');
+        lightbox.style.display = 'flex';
+      });
+    });
+
+    closeBtn.addEventListener('click', () => lightbox.style.display = 'none');
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.style.display = 'none'; });
+
+    // Navbar & Hamburger
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 80));
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => mobileMenu.classList.toggle('active'));
+  </script>
+</body>
+</html>
