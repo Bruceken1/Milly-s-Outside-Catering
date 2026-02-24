@@ -164,7 +164,7 @@
     .gallery-slide img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
     .gallery-slide:hover img { transform: scale(1.05); }
     .combined-section { padding: 5rem 0; background: rgba(20,20,20,0.6); }
-    .combined-grid { max-width: 1200px; margin: 0 auto; padding: 0 5%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .combined-grid { max-width: 1200px; margin: 0 auto; padding: 0 5%; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
     .quote-form { background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.2); border-radius: 20px; padding: 2.5rem; }
     .quote-form input, .quote-form select, .quote-form textarea { width: 100%; padding: 14px 18px; margin-bottom: 1.2rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.3); border-radius: 12px; color: var(--text); font-size: 1rem; }
     .quote-form input:focus, .quote-form select:focus, .quote-form textarea:focus { outline: none; border-color: var(--gold); }
@@ -259,6 +259,7 @@
     <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=600&q=30" alt="Elegant outdoor wedding catering setup by Milly's Outside Catering in Busia Kenya" class="bg">
     <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=500&q=30" alt="Professional corporate event catering with gold accents by Milly's Outside Catering" class="bg2">
   </main>
+
   <!-- About Us -->
   <section class="section">
     <h2 class="section-title">About Us</h2>
@@ -274,6 +275,44 @@
       </div>
     </div>
   </section>
+
+  <!-- Our Services -->
+  <!-- Our Services -->
+  <section class="section">
+    <h2 class="section-title">Our Services</h2>
+    <p class="section-subtitle">Complete solutions for your perfect event</p>
+    <div class="combined-grid">
+      <div class="quote-form" style="padding:2rem; text-align:center;">
+        <h3 style="color:var(--gold); margin-bottom:1rem;">Outside Catering</h3>
+        <p>Professional full-service catering with fresh, locally sourced meals delivered to any venue across Busia and Western Kenya.</p>
+      </div>
+      <div class="quote-form" style="padding:2rem; text-align:center;">
+        <h3 style="color:var(--gold); margin-bottom:1rem;">Events Management</h3>
+        <p>End-to-end event planning and coordination to ensure your occasion is seamless, stress-free and unforgettable.</p>
+      </div>
+      <div class="quote-form" style="padding:2rem; text-align:center;">
+        <h3 style="color:var(--gold); margin-bottom:1rem;">Tents and Seats for Hire</h3>
+        <p>High-quality tents, chairs, tables and setup for weddings, parties, corporate events and large gatherings.</p>
+      </div>
+      <div class="quote-form" style="padding:2rem; text-align:center;">
+        <h3 style="color:var(--gold); margin-bottom:1rem;">Public Address System</h3>
+        <p>Professional sound systems, microphones and speakers for clear announcements and entertainment at your event.</p>
+      </div>
+      <div class="quote-form" style="padding:2rem; text-align:center;">
+        <h3 style="color:var(--gold); margin-bottom:1rem;">Water Bowser</h3>
+        <p>Reliable supply of clean drinking water with our mobile water bowser for large events and remote locations.</p>
+      </div>
+      <div class="quote-form" style="padding:2rem; text-align:center;">
+        <h3 style="color:var(--gold); margin-bottom:1rem;">Portable Toilets</h3>
+        <p>Clean, well-maintained portable toilets for comfort and convenience at outdoor events and festivals.</p>
+      </div>
+      <div class="quote-form" style="padding:2rem; text-align:center;">
+        <h3 style="color:var(--gold); margin-bottom:1rem;">Decoration</h3>
+        <p>Beautiful event decoration with elegant gold accents, flowers and custom themes tailored to your vision.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Gallery -->
   <section class="section gallery">
     <h2 class="section-title">Our Gallery</h2>
