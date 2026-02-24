@@ -428,55 +428,38 @@
       link.addEventListener('click', closeMobileMenu);
     });
 
-    // ==================== RESEND FORM - MULTIPLE EMAILS (only change) ====================
-    const express = require('express');
-const cors = require('cors');
-const { Resend } = require('resend');
+    // ==================== RAILWAY + RESEND (only change) ====================
+    document.getElementById('quoteForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+     
+      const btn = this.querySelector('button');
+      const originalText = btn.textContent;
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
 
-const app = express();
-app.use(cors());
-app.use(express.json());
-app.use(express.static('.'));   // serves your index.html
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData.entries());
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+      try {
+        const res = await fetch('/api/quote', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
 
-app.post('/api/quote', async (req, res) => {
-  try {
-    const { name, email, phone, event_type, event_date, guests, message } = req.body;
-
-    await resend.emails.send({
-      from: "Milly's Outside Catering <millyoutsidecatering@gmail.com>",
-      to: [
-        'millyoutsidecatering@gmail.com',
-        // Add more emails here:
-        // 'yoursecondemail@gmail.com',
-        // 'yourthirdemail@gmail.com'
-      ],
-      subject: `New Quote Request - ${name}`,
-      html: `
-        <h2 style="color:#d4af37;">New Quote Request</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
-        <p><strong>Event Type:</strong> ${event_type}</p>
-        <p><strong>Date:</strong> ${event_date}</p>
-        <p><strong>Guests:</strong> ${guests}</p>
-        <p><strong>Message:</strong><br>${message.replace(/\n/g, '<br>')}</p>
-        <hr>
-        <p style="color:#666; font-size:12px;">Sent via Milly's Outside Catering website</p>
-      `
+        if (res.ok) {
+          alert('Quote request sent successfully!\nWe will reply within 2 hours.');
+          this.reset();
+        } else {
+          alert('Failed to send. Please try again or call +254 722529621');
+        }
+      } catch (err) {
+        alert('❌ Could not send request. Please check your internet or contact us directly.');
+      } finally {
+        btn.textContent = originalText;
+        btn.disabled = false;
+      }
     });
-
-    res.json({ success: true });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false });
-  }
-});
-
-const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`✅ Server running on port ${port}`));
   </script>
 </body>
 </html>
-
