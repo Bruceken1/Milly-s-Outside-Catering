@@ -16,9 +16,13 @@ app.post('/api/quote', async (req, res) => {
     const { name, email, phone, event_type, event_date, guests, message } = req.body;
 
     const result = await resend.emails.send({
-      from: "Milly's Outside Catering <quotes@millysoutsidecatering.co.ke>",   // ← Changed to "quotes@"
-      to: ['mukabiken@gmail.com'],   // change this to your real email
-      replyTo: email,   // so you can reply directly
+      from: "Milly's Outside Catering <quotes@millysoutsidecatering.co.ke>",
+      to: [
+        'millyoutsidecatering@gmail.com',     
+        'mukabikeng@gmail.com',               
+        
+      ],
+      replyTo: email,
       subject: `New Quote Request - ${name}`,
       html: `
         <h2 style="color:#d4af37;">New Quote Request</h2>
