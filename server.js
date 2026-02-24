@@ -10,10 +10,12 @@ app.use(express.static('.'));
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 app.post('/api/quote', async (req, res) => {
+  console.log('📨 New quote request received:', req.body);
+
   try {
     const { name, email, phone, event_type, event_date, guests, message } = req.body;
 
-    await resend.emails.send({
+    const result = await resend.emails.send({
       from: "Milly's Outside Catering <millyoutsidecatering@gmail.com>",
       to: ['millyoutsidecatering@gmail.com'],
       subject: `New Quote Request - ${name}`,
@@ -22,17 +24,21 @@ app.post('/api/quote', async (req, res) => {
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Phone:</strong> ${phone}</p>
-        <p><strong>Event:</strong> ${event_type}</p>
+        <p><strong>Event Type:</strong> ${event_type}</p>
         <p><strong>Date:</strong> ${event_date}</p>
         <p><strong>Guests:</strong> ${guests}</p>
         <p><strong>Message:</strong><br>${message ? message.replace(/\n/g, '<br>') : ''}</p>
+        <hr>
+        <p style="color:#666; font-size:12px;">Sent via Milly's Outside Catering website</p>
       `
     });
 
+    console.log('✅ Resend success:', result);
     res.json({ success: true });
+
   } catch (error) {
-    console.error('Resend error:', error);
-    res.status(500).json({ success: false });
+    console.error('❌ Resend ERROR:', error);
+    res.status(500).json({ success: false, error: error.message });
   }
 });
 
