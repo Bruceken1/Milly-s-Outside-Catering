@@ -22,21 +22,19 @@ app.post('/api/quote', async (req, res) => {
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Phone:</strong> ${phone}</p>
-        <p><strong>Event Type:</strong> ${event_type}</p>
+        <p><strong>Event:</strong> ${event_type}</p>
         <p><strong>Date:</strong> ${event_date}</p>
         <p><strong>Guests:</strong> ${guests}</p>
-        <p><strong>Message:</strong><br>${message.replace(/\n/g, '<br>')}</p>
-        <hr>
-        <p style="color:#666; font-size:12px;">Sent via Milly's Outside Catering website</p>
+        <p><strong>Message:</strong><br>${message ? message.replace(/\n/g, '<br>') : ''}</p>
       `
     });
 
     res.json({ success: true });
   } catch (error) {
-    console.error(error);
+    console.error('Resend error:', error);
     res.status(500).json({ success: false });
   }
 });
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Server running on port ${port}`));
+app.listen(port, () => console.log(`✅ Server running on port ${port}`));
