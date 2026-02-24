@@ -16,8 +16,9 @@ app.post('/api/quote', async (req, res) => {
     const { name, email, phone, event_type, event_date, guests, message } = req.body;
 
     const result = await resend.emails.send({
-      from: "Milly's Outside Catering <no-reply@millysoutsidecatering.co.ke>",   // ← FIXED
-      to: ['mukabikeng@gmail.com'],   // your test email
+      from: "Milly's Outside Catering <quotes@millysoutsidecatering.co.ke>",   // ← Changed to "quotes@"
+      to: ['mukabiken@gmail.com'],   // change this to your real email
+      replyTo: email,   // so you can reply directly
       subject: `New Quote Request - ${name}`,
       html: `
         <h2 style="color:#d4af37;">New Quote Request</h2>
@@ -38,7 +39,7 @@ app.post('/api/quote', async (req, res) => {
 
   } catch (error) {
     console.error('❌ Resend ERROR:', error);
-    res.status(500).json({ success: false, error: error.message });
+    res.status(500).json({ success: false });
   }
 });
 
