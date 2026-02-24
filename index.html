@@ -9,7 +9,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-JBY4C90RWQ');
 </script>
   <meta charset="UTF-8">
@@ -21,10 +20,8 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
   <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
- 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
- 
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Roboto:wght@300;400;500;900&display=swap");
     :root {
@@ -41,13 +38,12 @@
       font-family: 'Inter', sans-serif;
       font-size: 15px;
     }
-
     /* Navbar */
-    nav { 
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000; 
-      padding: 1.1rem 5%; display: flex; align-items: center; justify-content: space-between; 
-      background: rgba(10, 10, 10, 0.75); backdrop-filter: blur(12px); 
-      border-bottom: 1px solid rgba(212, 175, 55, 0.15); 
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 1.1rem 5%; display: flex; align-items: center; justify-content: space-between;
+      background: rgba(10, 10, 10, 0.75); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
     }
     nav.scrolled { background: rgba(10, 10, 10, 0.95); padding: 0.85rem 5%; }
     .logo { display: flex; align-items: center; gap: 12px; color: var(--gold); font-weight: 700; font-size: 1.3rem; text-decoration: none; }
@@ -55,42 +51,40 @@
     .nav-links { display: flex; gap: 2rem; }
     .nav-links a { color: var(--text); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
     .nav-links a:hover, .nav-links a.active { color: var(--gold); }
-
     /* Hamburger */
-    .hamburger { 
-      display: none; 
-      flex-direction: column; 
-      gap: 5px; 
-      cursor: pointer; 
-      z-index: 1100; 
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 1100;
     }
-    .hamburger span { 
-      width: 26px; 
-      height: 3px; 
-      background: var(--gold); 
-      transition: all 0.4s; 
+    .hamburger span {
+      width: 26px;
+      height: 3px;
+      background: var(--gold);
+      transition: all 0.4s;
     }
     .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
     .hamburger.active span:nth-child(2) { opacity: 0; }
     .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
-
     /* Mobile Menu - Side Panel */
-    .mobile-menu { 
-      position: fixed; 
-      top: 0; 
-      right: -300px; 
-      width: 280px; 
-      height: 100vh; 
-      background: #111; 
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 280px;
+      height: 100vh;
+      background: #111;
       box-shadow: -10px 0 30px rgba(0,0,0,0.6);
-      display: flex; 
-      flex-direction: column; 
-      padding: 80px 30px 30px; 
-      transition: right 0.4s ease; 
+      display: flex;
+      flex-direction: column;
+      padding: 80px 30px 30px;
+      transition: right 0.4s ease;
       z-index: 1050;
     }
     .mobile-menu.active { right: 0; }
-    
+   
     .mobile-menu .close-btn {
       position: absolute;
       top: 25px;
@@ -99,15 +93,13 @@
       color: var(--gold);
       cursor: pointer;
     }
-
-    .mobile-menu a { 
-      color: var(--text); 
-      font-size: 1.45rem; 
-      text-decoration: none; 
+    .mobile-menu a {
+      color: var(--text);
+      font-size: 1.45rem;
+      text-decoration: none;
       padding: 14px 0;
     }
     .mobile-menu a:hover { color: var(--gold); }
-
     /* Rest of your styles (unchanged) */
     main { position: relative; width: calc(min(90rem, 90%)); margin: 0 auto; min-height: 100vh; padding-block: min(20vh, 3rem); padding-top: 105px; }
     .left { max-width: 420px; }
@@ -117,7 +109,6 @@
     .left p { line-height: 1.65; font-size: 1rem; color: #ddd; }
     .left a { display: inline-block; margin-top: 2.2rem; padding: 0.85rem 2rem; background: transparent; border: 2px solid var(--gold); color: var(--gold); text-transform: uppercase; font-weight: 600; border-radius: 50px; text-decoration: none; font-size: 0.95rem; transition: 0.4s; }
     .left a:hover { background: var(--gold); color: var(--dark); }
-
     .swiper { width: 100%; padding-top: 3rem; }
     .swiper-slide { width: 320px; height: 480px; border-radius: 20px; display: flex; align-items: flex-end; background-size: cover; background-position: center; box-shadow: 0 20px 40px rgba(0,0,0,0.6); overflow: hidden; }
     .swiper-slide div { width: 100%; padding: 2rem 1.8rem; background: linear-gradient(to top, rgba(10,10,10,0.95), rgba(10,10,10,0.4)); opacity: 0; transition: opacity 0.6s; }
@@ -128,48 +119,38 @@
     .swiper-slide a:hover { background: var(--gold); color: var(--dark); }
     .swiper-pagination-bullet { background: #555; }
     .swiper-pagination-bullet-active { background: var(--gold); }
-
     .bg, .bg2 { position: fixed; z-index: -1; opacity: 0.08; pointer-events: none; }
     .bg { top: -80px; left: -120px; width: 380px; }
     .bg2 { bottom: -60px; right: -80px; width: 260px; }
-
     @media (min-width: 768px) {
       main { display: flex; align-items: center; gap: 4rem; }
       .bg, .bg2 { opacity: 0.12; }
     }
-
     .section { padding: 5rem 0; width: 100%; }
     .section-title { font-family: 'Playfair Display', serif; text-align: center; font-size: 2.4rem; margin-bottom: 1rem; background: linear-gradient(45deg, var(--gold), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .section-subtitle { text-align: center; color: var(--gray); max-width: 600px; margin: 0 auto 3.5rem; font-size: 1rem; }
-
     .about-content { max-width: 1100px; margin: 0 auto; padding: 0 5%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
     .about-text p { font-size: 1.02rem; line-height: 1.8; margin-bottom: 1.5rem; color: #ddd; }
     .about-image img { width: 100%; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
-
     .gallery { padding: 5rem 0; background: rgba(20,20,20,0.6); }
     .gallery-swiper { max-width: 1000px; margin: 0 auto; }
     .gallery-slide { width: 100%; height: 480px; border-radius: 20px; overflow: hidden; cursor: pointer; }
     .gallery-slide img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
     .gallery-slide:hover img { transform: scale(1.05); }
-
     .combined-section { padding: 5rem 0; background: rgba(20,20,20,0.6); }
     .combined-grid { max-width: 1200px; margin: 0 auto; padding: 0 5%; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
-
     .quote-form { background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.2); border-radius: 20px; padding: 2.5rem; }
     .quote-form input, .quote-form select, .quote-form textarea { width: 100%; padding: 14px 18px; margin-bottom: 1.2rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.3); border-radius: 12px; color: var(--text); font-size: 1rem; }
     .quote-form input:focus, .quote-form select:focus, .quote-form textarea:focus { outline: none; border-color: var(--gold); }
     .quote-form button { width: 100%; padding: 16px; background: var(--gold); color: var(--dark); border: none; border-radius: 50px; font-weight: 600; font-size: 1.05rem; cursor: pointer; }
     .quote-form button:hover { background: #e5c45a; }
-
     .locations { background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.2); border-radius: 20px; padding: 1.5rem; }
     .mini-map { width: 100%; height: 420px; border-radius: 16px; overflow: hidden; }
-
     footer { background: #050505; padding: 4rem 5% 2rem; border-top: 1px solid rgba(212,175,55,0.15); }
     .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 3rem; }
     .footer-col h3 { font-family: 'Playfair Display', serif; color: var(--gold); margin-bottom: 1.2rem; font-size: 1.4rem; }
     .footer-col p, .footer-col a { color: #bbb; line-height: 1.7; text-decoration: none; }
     .footer-col a:hover { color: var(--gold); }
-
     /* Professional Social Icons */
     .social-icons a {
       color: #bbb;
@@ -178,9 +159,7 @@
       transition: color 0.3s;
     }
     .social-icons a:hover { color: var(--gold); }
-
     .footer-bottom { text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08); color: #777; font-size: 0.9rem; }
-
     #lightbox {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0,0,0,0.95); display: none;
@@ -188,7 +167,6 @@
     }
     #lightbox img { max-width: 90%; max-height: 90vh; border-radius: 12px; box-shadow: 0 0 40px rgba(212,175,55,0.3); }
     #lightbox .close { position: absolute; top: 30px; right: 40px; font-size: 3rem; color: var(--gold); cursor: pointer; z-index: 2010; }
-
     @media (max-width: 768px) {
       .nav-links { display: none; }
       .hamburger { display: flex; }
@@ -198,7 +176,6 @@
   </style>
 </head>
 <body>
-
   <!-- Navbar -->
   <nav id="navbar">
     <a href="#" class="logo">
@@ -217,7 +194,6 @@
       <span></span><span></span><span></span>
     </div>
   </nav>
-
   <div class="mobile-menu" id="mobileMenu">
     <span class="close-btn" id="closeMenu">×</span>
     <a href="#" class="active">Home</a>
@@ -225,7 +201,6 @@
     <a href="#">Bookings</a>
     <a href="#">Contact Us</a>
   </div>
-
   <main>
     <!-- Hero -->
     <div class="left">
@@ -235,7 +210,6 @@
       <p>From intimate weddings to grand corporate galas, we bring fresh, locally-sourced flavors and elegant gold-accented service to every event across Kenya.</p>
       <a href="#">Request a Quote</a>
     </div>
-
     <div class="swiper">
       <div class="swiper-wrapper">
         <div class="swiper-slide" style="background-image: linear-gradient(to top, #0a0a0a, transparent), url('https://scontent-mba2-1.xx.fbcdn.net/v/t39.30808-6/614780545_1527704608825463_8480034336444095496_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeFdibgI1mEcTEKLgNkMKpdS6MDGW1HC9RzowMZbUcL1HG1XiPyk1p3aPD_wJ5XcklarC_aLnJUNJzo8jtANmgnb&_nc_ohc=ORjDMMd-Yd0Q7kNvwGG8I29&_nc_oc=AdniH6AmfkDri2qHwXbEVjAg7SHXXk7JLkznNyYE0NScDBx6Wuimj2uKWrkpVc0QAFA&_nc_zt=23&_nc_ht=scontent-mba2-1.xx&_nc_gid=8ZboYLe3Bqt7mdAINiY3QQ&oh=00_AftPBHe1kpQSicXbl2cWyidOVxkpfGMD9BlMbV0KGBkc0A&oe=69A34B5A')">
@@ -256,11 +230,9 @@
       </div>
       <div class="swiper-pagination"></div>
     </div>
-
     <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=600&q=30" alt="" class="bg">
     <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=500&q=30" alt="" class="bg2">
   </main>
-
   <!-- About Us -->
   <section class="section">
     <h2 class="section-title">About Us</h2>
@@ -276,7 +248,6 @@
       </div>
     </div>
   </section>
-
   <!-- Gallery -->
   <section class="section gallery">
     <h2 class="section-title">Our Gallery</h2>
@@ -324,12 +295,11 @@
       <div class="swiper-button-next"></div>
     </div>
   </section>
-
   <!-- Combined: Quote Form + Mini Map -->
   <section class="combined-section">
     <h2 class="section-title">Request a Quote & Our Locations</h2>
     <p class="section-subtitle">Get in touch and see where we serve</p>
-    
+   
     <div class="combined-grid">
       <div class="quote-form">
         <h3 style="text-align:center; margin-bottom:2rem; color:var(--gold);">Request a Quote</h3>
@@ -351,16 +321,14 @@
           <button type="submit">Send Request</button>
         </form>
       </div>
-
       <div class="locations">
         <div class="mini-map">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15959.999999999998!2d34.099!3d0.46!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1781f0b0b0b0b0b0%3A0x0!2zQnVzaWEgS2VueWE!5e0!3m2!1sen!2ske!4v1700000000000" 
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15959.999999999998!2d34.099!3d0.46!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1781f0b0b0b0b0b0%3A0x0!2zQnVzaWEgS2VueWE!5e0!3m2!1sen!2ske!4v1700000000000"
                   width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
       </div>
     </div>
   </section>
-
   <!-- Footer with Professional Social Icons -->
   <footer>
     <div class="footer-content">
@@ -402,13 +370,11 @@
       © 2026 Milly's Outside Catering. All Rights Reserved. | Designed By DIME SOLUTIONS
     </div>
   </footer>
-
   <!-- Lightbox -->
   <div id="lightbox">
     <span class="close">×</span>
     <img id="lightbox-img" src="" alt="">
   </div>
-
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
     // Hero Swiper
@@ -423,7 +389,6 @@
       pagination: { el: ".swiper-pagination", clickable: true },
       breakpoints: { 640: { slidesPerView: 2 }, 768: { slidesPerView: 1 }, 1024: { slidesPerView: 2 }, 1560: { slidesPerView: 3 } }
     });
-
     // Gallery Swiper
     new Swiper(".gallery-swiper", {
       loop: true,
@@ -432,7 +397,6 @@
       spaceBetween: 30,
       breakpoints: { 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
     });
-
     // Lightbox
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
@@ -445,53 +409,51 @@
     });
     closeBtn.addEventListener('click', () => lightbox.style.display = 'none');
     lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.style.display = 'none'; });
-
     // Hamburger Menu
     const navbar = document.getElementById('navbar');
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
     const closeMenuBtn = document.getElementById('closeMenu');
-
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 80);
     });
-
     hamburger.addEventListener('click', () => {
       mobileMenu.classList.add('active');
     });
-
     function closeMobileMenu() {
       mobileMenu.classList.remove('active');
     }
-
     closeMenuBtn.addEventListener('click', closeMobileMenu);
-
     document.querySelectorAll('.mobile-menu a').forEach(link => {
       link.addEventListener('click', closeMobileMenu);
     });
 
-    // ==================== RESEND FORM (only change made) ====================
+    // ==================== RESEND FORM - MULTIPLE EMAILS (only change) ====================
     document.getElementById('quoteForm').addEventListener('submit', async function(e) {
       e.preventDefault();
-      
+     
       const btn = this.querySelector('button');
       const originalText = btn.textContent;
       btn.textContent = 'Sending...';
       btn.disabled = true;
-
       const formData = new FormData(this);
       const data = Object.fromEntries(formData.entries());
-
       try {
         const res = await fetch('https://api.resend.com/emails', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 're_Hc7NqDhu_JnGfGLxSxyoYdbjejpooBWqn'   // ← REPLACE WITH YOUR REAL RESEND KEY
+            'Authorization': 're_Hc7NqDhu_JnGfGLxSxyoYdbjejpooBWqn'
           },
           body: JSON.stringify({
-            from: 'Milly\'s Outside Catering <millyoutsidecatering@gmail.com>',   // your business email as FROM
-            to: ['millyoutsidecatering@gmail.com'],                            // your business email as TO
+            from: 'Milly\'s Outside Catering <millyoutsidecatering@gmail.com>',
+            to: [
+              'millyoutsidecatering@gmail.com',
+              'mukabiken@gmail.com'
+              // Add more emails here (one per line):
+              // 'second@email.com',
+              // 'third@email.com'
+            ],
             subject: `New Quote Request from ${data.name}`,
             html: `
               <h2 style="color:#d4af37;">New Quote Request</h2>
@@ -507,7 +469,6 @@
             `
           })
         });
-
         if (res.ok) {
           alert('✅ Quote request sent successfully!\nWe will reply within 2 hours.');
           this.reset();
