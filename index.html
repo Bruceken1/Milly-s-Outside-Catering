@@ -334,10 +334,10 @@
       <div class="quote-form">
         <h3 style="text-align:center; margin-bottom:2rem; color:var(--gold);">Request a Quote</h3>
         <form id="quoteForm">
-          <input type="text" placeholder="Your Full Name" required>
-          <input type="email" placeholder="Email Address" required>
-          <input type="tel" placeholder="Phone Number" required>
-          <select required>
+          <input type="text" name="name" placeholder="Your Full Name" required>
+          <input type="email" name="email" placeholder="Email Address" required>
+          <input type="tel" name="phone" placeholder="Phone Number" required>
+          <select name="event_type" required>
             <option value="">Type of Event</option>
             <option value="wedding">Wedding</option>
             <option value="corporate">Corporate Event</option>
@@ -345,9 +345,9 @@
             <option value="festival">Festival / Large Gathering</option>
             <option value="other">Other</option>
           </select>
-          <input type="date" required>
-          <input type="number" placeholder="Number of Guests" min="10" required>
-          <textarea rows="4" placeholder="Tell us more about your event (venue, special requests...)" required></textarea>
+          <input type="date" name="event_date" required>
+          <input type="number" name="guests" placeholder="Number of Guests" min="10" required>
+          <textarea name="message" rows="4" placeholder="Tell us more about your event (venue, special requests...)" required></textarea>
           <button type="submit">Send Request</button>
         </form>
       </div>
@@ -469,9 +469,58 @@
     document.querySelectorAll('.mobile-menu a').forEach(link => {
       link.addEventListener('click', closeMobileMenu);
     });
+
+    // ==================== RESEND FORM (only change made) ====================
+    document.getElementById('quoteForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const btn = this.querySelector('button');
+      const originalText = btn.textContent;
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData.entries());
+
+      try {
+        const res = await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 're_Hc7NqDhu_JnGfGLxSxyoYdbjejpooBWqn'   // ← REPLACE WITH YOUR REAL RESEND KEY
+          },
+          body: JSON.stringify({
+            from: 'Milly\'s Outside Catering <millyoutsidecatering@gmail.com>',   // your business email as FROM
+            to: ['millyoutsidecatering@gmail.com'],                            // your business email as TO
+            subject: `New Quote Request from ${data.name}`,
+            html: `
+              <h2 style="color:#d4af37;">New Quote Request</h2>
+              <p><strong>Name:</strong> ${data.name}</p>
+              <p><strong>Email:</strong> ${data.email}</p>
+              <p><strong>Phone:</strong> ${data.phone}</p>
+              <p><strong>Event Type:</strong> ${data.event_type}</p>
+              <p><strong>Date:</strong> ${data.event_date}</p>
+              <p><strong>Guests:</strong> ${data.guests}</p>
+              <p><strong>Message:</strong><br>${data.message.replace(/\n/g, '<br>')}</p>
+              <hr>
+              <p style="color:#666; font-size:12px;">Sent via Milly's Outside Catering website</p>
+            `
+          })
+        });
+
+        if (res.ok) {
+          alert('✅ Quote request sent successfully!\nWe will reply within 2 hours.');
+          this.reset();
+        } else {
+          alert('❌ Failed to send. Please try again or contact us directly.');
+        }
+      } catch (err) {
+        alert('❌ Could not send request. Please check your internet or contact us directly on +254 722529621');
+      } finally {
+        btn.textContent = originalText;
+        btn.disabled = false;
+      }
+    });
   </script>
 </body>
 </html>
-
-
-
