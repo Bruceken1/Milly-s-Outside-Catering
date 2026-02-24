@@ -1,0 +1,47 @@
+const express = require('express');
+const cors = require('cors');
+const { Resend } = require('resend');
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+app.use(express.static('.'));   // serves your index.html
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+app.post('/api/quote', async (req, res) => {
+  try {
+    const { name, email, phone, event_type, event_date, guests, message } = req.body;
+
+    await resend.emails.send({
+      from: "Milly's Outside Catering <millyoutsidecatering@gmail.com>",
+      to: [
+        'millyoutsidecatering@gmail.com',
+        // Add more emails here:
+        // 'yoursecondemail@gmail.com',
+        // 'yourthirdemail@gmail.com'
+      ],
+      subject: `New Quote Request - ${name}`,
+      html: `
+        <h2 style="color:#d4af37;">New Quote Request</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Event Type:</strong> ${event_type}</p>
+        <p><strong>Date:</strong> ${event_date}</p>
+        <p><strong>Guests:</strong> ${guests}</p>
+        <p><strong>Message:</strong><br>${message.replace(/\n/g, '<br>')}</p>
+        <hr>
+        <p style="color:#666; font-size:12px;">Sent via Milly's Outside Catering website</p>
+      `
+    });
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false });
+  }
+});
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`✅ Server running on port ${port}`));
