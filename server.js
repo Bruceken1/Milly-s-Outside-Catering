@@ -16,8 +16,8 @@ app.post('/api/quote', async (req, res) => {
     const { name, email, phone, event_type, event_date, guests, message } = req.body;
 
     const result = await resend.emails.send({
-      from: "Milly's Outside Catering <millysoutsidecatering.co.ke>",
-      to: ['mukabikeng@gmail.com'],
+      from: "Director<no-reply@millysoutsidecatering.co.ke>",   // ← FIXED
+      to: ['mukabikeng@gmail.com'],   // your test email
       subject: `New Quote Request - ${name}`,
       html: `
         <h2 style="color:#d4af37;">New Quote Request</h2>
