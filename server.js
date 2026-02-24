@@ -5,7 +5,7 @@ const { Resend } = require('resend');
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(express.static('.'));   // serves your index.html
+app.use(express.static('.'));
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -15,12 +15,7 @@ app.post('/api/quote', async (req, res) => {
 
     await resend.emails.send({
       from: "Milly's Outside Catering <millyoutsidecatering@gmail.com>",
-      to: [
-        'millyoutsidecatering@gmail.com',
-        // Add more emails here:
-        // 'yoursecondemail@gmail.com',
-        // 'yourthirdemail@gmail.com'
-      ],
+      to: ['millyoutsidecatering@gmail.com'],
       subject: `New Quote Request - ${name}`,
       html: `
         <h2 style="color:#d4af37;">New Quote Request</h2>
@@ -44,4 +39,4 @@ app.post('/api/quote', async (req, res) => {
 });
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`✅ Server running on port ${port}`));
+app.listen(port, () => console.log(`Server running on port ${port}`));
