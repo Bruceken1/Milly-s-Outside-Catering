@@ -19,7 +19,7 @@ app.post('/api/quote', async (req, res) => {
       from: "Milly's Outside Catering <quotes@millysoutsidecatering.co.ke>",
       to: [
         'millyoutsidecatering@gmail.com',     
-        'mukabikeng@gmail.com',               
+        'mukabibrucekeng@gmail.com',               
         
       ],
       replyTo: email,
